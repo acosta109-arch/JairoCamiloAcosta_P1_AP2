@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ucne.edu.jairocamilo_p1_ap2.ui.theme.JairoCamilo_P1_AP2Theme
 import androidx.room.Room
+import ucne.edu.jairocamilo_p1_ap2.data.local.database.ParcialDb
 import ucne.edu.jairocamilo_p1_ap2.presentation.navigation.AppNavHost
 
 @AndroidEntryPoint
@@ -25,11 +26,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             JairoCamilo_P1_AP2Theme {
                 val navHost = rememberNavController()
-                AppNavHost(
-                    navController = navHost
-                )
+                val parcialDb = Room.databaseBuilder(
+                    applicationContext,
+                    ParcialDb::class.java,
+                    "ParcialDb"
+                ).build()
             }
         }
     }
 }
+
 
