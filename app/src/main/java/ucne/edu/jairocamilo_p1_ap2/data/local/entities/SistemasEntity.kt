@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class SistemasEntity(
     @PrimaryKey
     val sistemaId: Int? = null,
-    val nombre: String = ""
+    val nombre: String = "",
+    val precio: Double
 )

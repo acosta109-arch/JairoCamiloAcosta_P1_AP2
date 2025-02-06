@@ -7,7 +7,7 @@ import ucne.edu.jairocamilo_p1_ap2.data.local.entities.SistemasEntity
 
 @Database(
     entities = [SistemasEntity::class],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 

@@ -35,9 +35,9 @@ class SistemasViewModel @Inject constructor(
 
     fun saveSistemas(){
         viewModelScope.launch {
-            if(_uiState.value.nombre.isBlank()){
+            if(_uiState.value.nombre.isBlank() || _uiState.value.precio == null){
                 _uiState.update {
-                    it.copy(errorMessage = "El campo no puede estar vacio.", successMessage = null)
+                    it.copy(errorMessage = "Todos los campos tienen que ser completados.", successMessage = null)
                 }
                 return@launch
             }
@@ -88,7 +88,8 @@ class SistemasViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         sistemaId = sistema?.sistemaId,
-                        nombre = sistema?.nombre ?:""
+                        nombre = sistema?.nombre ?:"",
+                        precio = sistema?.precio
                     )
                 }
             }
@@ -101,6 +102,13 @@ class SistemasViewModel @Inject constructor(
         }
     }
 
+    fun onPrecioChange(newPrecio: String){
+        val precioDouble = newPrecio.toDoubleOrNull()
+        _uiState.update {
+            it.copy(precio = precioDouble)
+        }
+    }
+
     fun clearMessages(){
         _uiState.update {
             it.copy(errorMessage = null, successMessage = null)
@@ -109,12 +117,14 @@ class SistemasViewModel @Inject constructor(
 
     fun UiState.toEntity() = SistemasEntity(
         sistemaId = sistemaId,
-        nombre = nombre
+        nombre = nombre,
+        precio = precio ?: 0.0
     )
 
     data class UiState(
         val sistemaId: Int? = null,
         val nombre: String = "",
+        val precio: Double? = null,
         val errorMessage: String? = null,
         val successMessage: String? = null,
         val sistemas: List<SistemasEntity> = emptyList()
