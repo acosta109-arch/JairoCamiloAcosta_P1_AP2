@@ -4,19 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ucne.edu.jairocamilo_p1_ap2.ui.theme.JairoCamilo_P1_AP2Theme
 import androidx.room.Room
-import ucne.edu.jairocamilo_p1_ap2.data.local.database.ParcialDb
-import ucne.edu.jairocamilo_p1_ap2.presentation.navigation.AppNavHost
+import ucne.edu.jairocamilo_p1_ap2.data.local.database.SistemaDb
+import ucne.edu.jairocamilo_p1_ap2.presentation.navigation.registro_parcial
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -26,11 +19,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             JairoCamilo_P1_AP2Theme {
                 val navHost = rememberNavController()
-                val parcialDb = Room.databaseBuilder(
+                val sistemaDb = Room.databaseBuilder(
                     applicationContext,
-                    ParcialDb::class.java,
+                    SistemaDb::class.java,
                     "ParcialDb"
                 ).build()
+
+                registro_parcial(
+                    navHostController = navHost,
+                    sistemaDb = sistemaDb
+                )
             }
         }
     }

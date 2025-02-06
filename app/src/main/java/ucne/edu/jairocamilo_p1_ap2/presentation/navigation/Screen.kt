@@ -4,6 +4,14 @@ import kotlinx.serialization.Serializable
 
 sealed class Screen {
     @Serializable
-    data object ParcialList : Screen()
+    data object SistemaList : Screen()
 
+    @Serializable
+    data class Sistemas(val sistemaId: Int): Screen()
+
+    @Serializable
+    data class EditSistemas(val sistemaId: Int): Screen()
+
+    @Serializable
+    data class DeleteSistemas(val sistemaId: Int): Screen()
 }
