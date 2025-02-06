@@ -74,7 +74,7 @@ fun EditSistemaBodyScreen(
                     )
                 },
                 colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = Color(0xFF6200EE)
+                    containerColor = Color.Red
                 ),
                 navigationIcon = {
                     IconButton(onClick = { goBack() }) {

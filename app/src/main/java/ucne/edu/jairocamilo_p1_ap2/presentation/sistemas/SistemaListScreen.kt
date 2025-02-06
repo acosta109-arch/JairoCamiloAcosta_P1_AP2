@@ -87,7 +87,7 @@ fun SistemaListBodyScreen(
                     }
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = Color(0xFF6200EE)
+                    containerColor = Color.Red
                 )
             )
         },
