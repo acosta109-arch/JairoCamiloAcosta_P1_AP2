@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import ucne.edu.jairocamilo_p1_ap2.data.local.database.SistemaDb
 import javax.inject.Singleton
 
 
@@ -15,5 +16,16 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun provideAP2Db(@ApplicationContext applicationContext: Context) = applicationContext
+    fun provideSistemaDb(@ApplicationContext applicationContext: Context): SistemaDb =
+        Room.databaseBuilder(
+            applicationContext,
+            SistemaDb::class.java,
+            "Parcial.db"
+        ).fallbackToDestructiveMigration()
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideSistemaDao(appDataDb: SistemaDb) = appDataDb.sistemaDao()
+
 }
